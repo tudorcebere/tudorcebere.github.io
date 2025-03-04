@@ -1,4 +1,4 @@
-name: Build and Deploy Jekyll Site
+name: Deploy Prebuilt Site to GitHub Pages
 
 on:
   push:
@@ -6,19 +6,14 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2.3'
-      - name: Install Dependencies
-        run: bundle install
-      - name: Build Site
-        run: bundle exec jekyll build
-      - name: Deploy to GitHub Pages
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy Prebuilt Site
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
