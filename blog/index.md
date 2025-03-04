@@ -4,7 +4,7 @@ title: blog
 nav_order: 2
 ---
 
-
+<!-- 
   <h1 class="content-listing-header sans">Articles</h1>
   <ul class="content-listing ">
     {% for post in site.posts %}      
@@ -15,4 +15,4 @@ nav_order: 2
           <div>{{ post.excerpt }}</div> 
         </li>
     {% endfor %}
-  </ul>
+  </ul> -->
