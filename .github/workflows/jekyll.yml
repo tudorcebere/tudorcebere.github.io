@@ -13,20 +13,68 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Deploy to gh-pages
+      - name: Build site
         run: |
-          # Go into _site (the folder with your generated site)
-          cd _site
+          # Example using Jekyll
+          gem install bundler jekyll
+          bundle exec jekyll build --destination _site
 
-          # If there's already a .git folder in _site, remove it
+      - name: Deploy to gh-pages (using personal account)
+        run: |
+          cd _site
           rm -rf .git
 
+          # Initialize a fresh repo
           git init
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+
+          # Configure commit info to match your personal GitHub account
+          git config user.name "YourNameHere"
+          git config user.email "YourEmailHere"
 
           git add .
           git commit -m "Deploy site"
 
-          # Force-push to the gh-pages branch
-          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" master:gh-pages
+          # Force-push to gh-pages using your personal token
+          git push --force \
+            "https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git" \
+            HEAD:gh-pages
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main  # or whichever branch you want to build from
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Build site
+        run: |
+          # Example using Jekyll
+          gem install bundler jekyll
+          bundle exec jekyll build --destination _site
+
+      - name: Deploy to gh-pages (using personal account)
+        run: |
+          cd _site
+          rm -rf .git
+
+          # Initialize a fresh repo
+          git init
+
+          # Configure commit info to match your personal GitHub account
+          git config user.name "Tudor Cebere"
+          git config user.email "tudorcebere@gmail.com"
+
+          git add .
+          git commit -m "Deploy site"
+
+          # Force-push to gh-pages using your personal token
+          git push --force \
+            "https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git" \
+            HEAD:gh-pages
