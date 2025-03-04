@@ -1,20 +1,32 @@
-# name: Deploy Prebuilt Site to GitHub Pages
+name: Build and Deploy
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main  # or whichever branch you want to build from
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v2
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
 
-#       - name: Deploy Prebuilt Site
-#         uses: peaceiris/actions-gh-pages@v3
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./_site
+      - name: Deploy to gh-pages
+        run: |
+          # Go into _site (the folder with your generated site)
+          cd _site
+
+          # If there's already a .git folder in _site, remove it
+          rm -rf .git
+
+          git init
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "Deploy site"
+
+          # Force-push to the gh-pages branch
+          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" master:gh-pages
