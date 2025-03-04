@@ -3,7 +3,7 @@ name: Publish with Rake
 on:
   push:
     branches:
-      - master  # or main
+      - main  # or main
 
 jobs:
   build-and-publish:
