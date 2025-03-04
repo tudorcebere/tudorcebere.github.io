@@ -39,19 +39,19 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
 
 
-  <link rel="stylesheet" type="text/css" href="https://tudorcebere.github.io//css/tufte.css">
-  <!-- <link rel="stylesheet" type="text/css" href="https://tudorcebere.github.io//css/print.css" media="print"> -->
+  <link rel="stylesheet" type="text/css" href="https://tudorcebere.github.io/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://tudorcebere.github.io/css/print.css" media="print"> -->
 
-  <link rel="canonical" href="https://tudorcebere.github.io//articles/22/dp-ht">
+  <link rel="canonical" href="https://tudorcebere.github.io/articles/22/dp-ht">
 
-  <link rel="alternate" type="application/rss+xml" title="Tufte-Jekyll" href="https://tudorcebere.github.io//feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Jekyll" href="https://tudorcebere.github.io/feed.xml" />
 </head>
 
   <body>
     <header>
   <nav class="group">
-    <a href="https://tudorcebere.github.io//">
-      <img class="badge" src="https://tudorcebere.github.io//assets/img/badge_1.png" alt="CH">
+    <a href="https://tudorcebere.github.io/">
+      <img class="badge" src="https://tudorcebere.github.io/assets/img/badge_1.png" alt="CH">
     </a>
     
     
@@ -61,7 +61,7 @@
     
       
         
-          <a href="https://tudorcebere.github.io//css/print.css"></a>
+          <a href="https://tudorcebere.github.io/css/print.css"></a>
         
       
     
@@ -69,13 +69,13 @@
     
       
         
-          <a href="https://tudorcebere.github.io//">About</a>
+          <a href="https://tudorcebere.github.io/">About</a>
         
       
     
       
         
-          <a href="https://tudorcebere.github.io//blog/">blog</a>
+          <a href="https://tudorcebere.github.io/blog/">blog</a>
         
       
     
@@ -101,7 +101,7 @@
 <div class="epigraph"><blockquote><p>Differential privacy describes a promise, made by a data holder, or curator, to a data subject: “You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available."</p><footer>Cynthia Dwork, Aaron Roth, <cite>The Algorithmic Foundations
 of DP</cite></footer></blockquote></div>
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io//assets/blog_resources/dp_ht/spiderman_meme.jpg" /><br />If you did not smile, then I recommend reading an introductory material on on Differential Privacy.</span></p>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io/assets/blog_resources/dp_ht/spiderman_meme.jpg" /><br />If you did not smile, then I recommend reading an introductory material on on Differential Privacy.</span></p>
 
 <p>In simple terms, changing one individual’s data in the dataset does not significantly alter the distribution of \(M\)’s outputs. Because of this property, an adversary who tries to pinpoint whether your data is included (or what your individual contribution might be) cannot succeed with high confidence. Next, let’s explore what adversaries actually aim to do and how Differential Privacy constrains their efforts.</p>
 
@@ -109,7 +109,7 @@ of DP</cite></footer></blockquote></div>
 
 <p>Differential privacy is the standard for data privacy because it makes no assumptions. If an algorithm \(M\) is differentially private, an attacker can have <strong>unlimited auxiliary information</strong> and <strong>unbounded computational power</strong>, yet they still cannot reliably determine whether a particular individual’s data was included in the dataset. This is due to statistical indistinguishability: the outputs of \(M\) barely change when one person’s data is swapped in or out. Moreover, DP must hold against all adversaries  \(A\) and for every pair of neighboring datasets \((D_1,D)2)\). The diagram below illustrates the adversary’s objective: to distinguish whether an output came from \(D_1\) or \(D_2\).</p>
 
-<figure><img src="https://tudorcebere.github.io//assets/blog_resources/dp_ht/adversarial_game_of_privacy.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
+<figure><img src="https://tudorcebere.github.io/assets/blog_resources/dp_ht/adversarial_game_of_privacy.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
 
 <p>Formally, we can view this as a hypothesis test:</p>
 
@@ -145,7 +145,7 @@ of DP</cite></footer></blockquote></div>
 
 <p>These inequalities imply that an adversary cannot simultaneously keep both FPR and FNR low. In other words, \(\epsilon\) effectively limits how well an attacker can do, creating “trust regions”, which describe the performance of all adversaries. Plotting these regions for multiple values of epsilon, we get:</p>
 
-<figure><img src="https://tudorcebere.github.io//assets/blog_resources/dp_ht/fnr_fpr_epsilon.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
+<figure><img src="https://tudorcebere.github.io/assets/blog_resources/dp_ht/fnr_fpr_epsilon.png" /><figcaption class="maincolumn-figure"></figcaption></figure>
 
 <p>We observe how, as we increase \(\epsilon\), adversaries with lower (FNR, FPR) pairs are allowed for the mechanism, suggesting the existence of stronger adversaries, giving an interpretable alternative definition for \(\epsilon\). Next, we will give a similar interpretation to another well-known variant of differential privacy, Approximate Differential Privacy.</p>
 
@@ -153,7 +153,7 @@ of DP</cite></footer></blockquote></div>
 
 <p>** Approximate DP ** is a relaxation of pure DP that introduces a parameter \(\delta\) to account for rare “catastrophic failure” events. This type of relaxation is common in cryptography to achieve practicality, as \(\epsilon\)-DP is both restrictive and hard on utility.  Keeping the notation and above \((\epsilon, \delta)\)-DP is defined as:</p>
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io//assets/blog_resources/dp_ht/download_(2).png" /><br /></span></p>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io/assets/blog_resources/dp_ht/download_(2).png" /><br /></span></p>
 
 \[P[M(D_1) \in O] &lt; e^\epsilon * P[M(D_2) \in O] + \delta\]
 
@@ -165,7 +165,7 @@ of DP</cite></footer></blockquote></div>
 
 <p>Similarly, plotting the above pair of inequalities for various pairs of \((\epsilon, \delta)\):</p>
 
-<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io//assets/blog_resources/dp_ht/jack_nicholson.jpg" /><br />If you did not smile, then I recommend reading an introductory material on on Differential Privacy.</span></p>
+<p><label for="mf-id-whatever" class="margin-toggle">⊕</label><input type="checkbox" id="mf-id-whatever" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="https://tudorcebere.github.io/assets/blog_resources/dp_ht/jack_nicholson.jpg" /><br />If you did not smile, then I recommend reading an introductory material on on Differential Privacy.</span></p>
 
 <p>Observe how the gap between the blue dotted line and the \(\epsilon=0\) axis changes. When \(\delta = 0\), these lines coincide, matching the pure \(\epsilon\)-DP scenario. As \(\delta\) grows, a new “perfect privacy” zone emerges between the dotted line and the \(\epsilon = 0\) axis. In this zone, we essentially permit a tiny probability of unlikely adversarial behavior, hence the relaxation to Approximate DP. However, \(\delta\) must remain small so that these rare events don’t actually happen.</p>
 
