@@ -1,34 +1,44 @@
-name: Build and Deploy
+name: Publish with Rake
 
 on:
   push:
     branches:
-      - main  # or whichever branch you want to build from
+      - master  # Adjust if your default branch is "main"
 
 jobs:
-  build_and_deploy:
+  build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the code
+      # 1) Check out code
+      - name: Check out the repository
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false  # We'll override credentials below
 
-      - name: Deploy to gh-pages (using personal account)
+      # 2) Set up Ruby
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'  # or whichever version you need
+
+      # 3) Install dependencies (optional)
+      #    If you have a Gemfile, bundler will install your gems. Otherwise, you
+      #    could do `gem install jekyll rake` here. Adjust as needed.
+      - name: Install gems
         run: |
-          cd _site
-          rm -rf .git
+          gem install bundler
+          bundle install --path vendor/bundle
 
-          # Initialize a fresh repo
-          git init
+      # 4) Configure Git so the rake task can push. We replace "origin" with a
+      #    token-based URL so that your `git push origin gh-pages` in Rakefile works.
+      - name: Configure Git for pushing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
 
-          # Configure commit info to match your personal GitHub account
-          git config user.name "Tudor Cebere"
-          git config user.email "tudorcebere@gmail.com"
-
-          git add .
-          git commit -m "Deploy site"
-
-          # Force-push to gh-pages using your personal token
-          git push --force \
-            "https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git" \
-            HEAD:gh-pages
+      # 5) Run the Rake publish task
+      - name: Publish to gh-pages
+        run: |
+          bundle exec rake publish
