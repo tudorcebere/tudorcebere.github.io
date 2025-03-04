@@ -3,39 +3,39 @@ name: Publish with Rake
 on:
   push:
     branches:
-      - main
-      
+      - master  # or main
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out code
-      - name: Check out the repository
+      - name: Check out
         uses: actions/checkout@v2
         with:
-          persist-credentials: false  # We'll override credentials below
+          persist-credentials: false
 
-      # 2) Set up Ruby
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'  # or whichever version you need
+          ruby-version: '3.0'  # or a more recent version if you prefer
 
-      - name: Install gems
+      - name: Update RubyGems
+        run: gem update --system
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install your gems
         run: |
-          gem install bundler
-          bundle install
+          gem install jekyll rake
 
-      # # 4) Configure Git so the rake task can push. We replace "origin" with a
-      # #    token-based URL so that your `git push origin gh-pages` in Rakefile works.
-      # - name: Configure Git for pushing
-      #   run: |
-      #     git config user.name "github-actions[bot]"
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
-      #     git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
 
-      # 5) Run the Rake publish task
-      - name: Publish to gh-pages
+      - name: Run Rake publish
         run: |
           bundle exec rake publish
