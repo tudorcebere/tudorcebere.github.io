@@ -3,8 +3,8 @@ name: Publish with Rake
 on:
   push:
     branches:
-      - master  # Adjust if your default branch is "main"
-
+      - main
+      
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
