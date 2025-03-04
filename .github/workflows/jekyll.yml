@@ -22,13 +22,10 @@ jobs:
         with:
           ruby-version: '3.0'  # or whichever version you need
 
-      # # 3) Install dependencies (optional)
-      # #    If you have a Gemfile, bundler will install your gems. Otherwise, you
-      # #    could do `gem install jekyll rake` here. Adjust as needed.
-      # - name: Install gems
-      #   run: |
-      #     gem install bundler
-      #     bundle install --path vendor/bundle
+      - name: Install gems
+        run: |
+          gem install bundler
+          bundle install
 
       # # 4) Configure Git so the rake task can push. We replace "origin" with a
       # #    token-based URL so that your `git push origin gh-pages` in Rakefile works.
