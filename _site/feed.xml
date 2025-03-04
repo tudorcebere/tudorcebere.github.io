@@ -3,10 +3,10 @@
   <channel>
     <title>Tufte-Jekyll</title>
     <description>A Jekyll theme for content-rich sites</description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Mar 2025 05:46:14 -0500</pubDate>
-    <lastBuildDate>Tue, 04 Mar 2025 05:46:14 -0500</lastBuildDate>
+    <link>//</link>
+    <atom:link href="//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 04 Mar 2025 05:50:40 -0500</pubDate>
+    <lastBuildDate>Tue, 04 Mar 2025 05:50:40 -0500</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
@@ -27,8 +27,8 @@
 &lt;p&gt;Strong writing skills are important for sharing ideas. I found &lt;a href=&quot;https://www.bartleby.com/lit-hub/the-elements-of-style&quot;&gt;The Elements of Style&lt;/a&gt; and &lt;a href=&quot;https://www.microsoft.com/en-us/research/academic-program/write-great-resepuarch-paper/&quot;&gt;How to write a great paper by S.P. Jones&lt;/a&gt; helpful for improving my writing style. I also enjoyed reading Oded Goldreich’s blog, such as &lt;a href=&quot;https://www.wisdom.weizmann.ac.il/~oded/writing.html&quot;&gt;How to write a paper&lt;/a&gt; and &lt;a href=&quot;https://www.wisdom.weizmann.ac.il/~oded/on-ideas.html&quot;&gt;On the emotional difficulty of conducting research&lt;/a&gt;. These pieces made me more aware of both the technical and personal sides of research.&lt;/p&gt;
 </description>
         <pubDate>Sun, 29 Oct 2023 00:00:00 -0400</pubDate>
-        <link>/articles/23/1st_year_resources</link>
-        <guid isPermaLink="true">/articles/23/1st_year_resources</guid>
+        <link>//articles/23/1st_year_resources</link>
+        <guid isPermaLink="true">//articles/23/1st_year_resources</guid>
         
         <category>learning resources</category>
         
@@ -52,7 +52,7 @@
 &lt;div class=&quot;epigraph&quot;&gt;&lt;blockquote&gt;&lt;p&gt;Differential privacy describes a promise, made by a data holder, or curator, to a data subject: “You will not be affected, adversely or otherwise, by allowing your data to be used in any study or analysis, no matter what other studies, data sets, or information sources, are available.&quot;&lt;/p&gt;&lt;footer&gt;Cynthia Dwork, Aaron Roth, &lt;cite&gt;The Algorithmic Foundations
 of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/blog_resources/dp_ht/spiderman_meme.jpg&quot; /&gt;&lt;br /&gt;If you did not smile, then I recommend reading an introductory material on on Differential Privacy.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;//assets/blog_resources/dp_ht/spiderman_meme.jpg&quot; /&gt;&lt;br /&gt;If you did not smile, then I recommend reading an introductory material on on Differential Privacy.&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;In simple terms, changing one individual’s data in the dataset does not significantly alter the distribution of \(M\)’s outputs. Because of this property, an adversary who tries to pinpoint whether your data is included (or what your individual contribution might be) cannot succeed with high confidence. Next, let’s explore what adversaries actually aim to do and how Differential Privacy constrains their efforts.&lt;/p&gt;
 
@@ -60,7 +60,7 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 &lt;p&gt;Differential privacy is the standard for data privacy because it makes no assumptions. If an algorithm \(M\) is differentially private, an attacker can have &lt;strong&gt;unlimited auxiliary information&lt;/strong&gt; and &lt;strong&gt;unbounded computational power&lt;/strong&gt;, yet they still cannot reliably determine whether a particular individual’s data was included in the dataset. This is due to statistical indistinguishability: the outputs of \(M\) barely change when one person’s data is swapped in or out. Moreover, DP must hold against all adversaries  \(A\) and for every pair of neighboring datasets \((D_1,D)2)\). The diagram below illustrates the adversary’s objective: to distinguish whether an output came from \(D_1\) or \(D_2\).&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/blog_resources/dp_ht/adversarial_game_of_privacy.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;//assets/blog_resources/dp_ht/adversarial_game_of_privacy.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;Formally, we can view this as a hypothesis test:&lt;/p&gt;
 
@@ -96,7 +96,7 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 &lt;p&gt;These inequalities imply that an adversary cannot simultaneously keep both FPR and FNR low. In other words, \(\epsilon\) effectively limits how well an attacker can do, creating “trust regions”, which describe the performance of all adversaries. Plotting these regions for multiple values of epsilon, we get:&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/blog_resources/dp_ht/fnr_fpr_epsilon.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;//assets/blog_resources/dp_ht/fnr_fpr_epsilon.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;We observe how, as we increase \(\epsilon\), adversaries with lower (FNR, FPR) pairs are allowed for the mechanism, suggesting the existence of stronger adversaries, giving an interpretable alternative definition for \(\epsilon\). Next, we will give a similar interpretation to another well-known variant of differential privacy, Approximate Differential Privacy.&lt;/p&gt;
 
@@ -104,7 +104,7 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 &lt;p&gt;** Approximate DP ** is a relaxation of pure DP that introduces a parameter \(\delta\) to account for rare “catastrophic failure” events. This type of relaxation is common in cryptography to achieve practicality, as \(\epsilon\)-DP is both restrictive and hard on utility.  Keeping the notation and above \((\epsilon, \delta)\)-DP is defined as:&lt;/p&gt;
 
-&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/blog_resources/dp_ht/download_(2).png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;//assets/blog_resources/dp_ht/download_(2).png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
 
 \[P[M(D_1) \in O] &amp;lt; e^\epsilon * P[M(D_2) \in O] + \delta\]
 
@@ -116,7 +116,7 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 &lt;p&gt;Similarly, plotting the above pair of inequalities for various pairs of \((\epsilon, \delta)\):&lt;/p&gt;
 
-&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/blog_resources/dp_ht/jack_nicholson.jpg&quot; /&gt;&lt;br /&gt;If you did not smile, then I recommend reading an introductory material on on Differential Privacy.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;//assets/blog_resources/dp_ht/jack_nicholson.jpg&quot; /&gt;&lt;br /&gt;If you did not smile, then I recommend reading an introductory material on on Differential Privacy.&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;Observe how the gap between the blue dotted line and the \(\epsilon=0\) axis changes. When \(\delta = 0\), these lines coincide, matching the pure \(\epsilon\)-DP scenario. As \(\delta\) grows, a new “perfect privacy” zone emerges between the dotted line and the \(\epsilon = 0\) axis. In this zone, we essentially permit a tiny probability of unlikely adversarial behavior, hence the relaxation to Approximate DP. However, \(\delta\) must remain small so that these rare events don’t actually happen.&lt;/p&gt;
 
@@ -126,8 +126,8 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Thu, 01 Dec 2022 00:00:00 -0500</pubDate>
-        <link>/articles/22/dp-ht</link>
-        <guid isPermaLink="true">/articles/22/dp-ht</guid>
+        <link>//articles/22/dp-ht</link>
+        <guid isPermaLink="true">//articles/22/dp-ht</guid>
         
         <category>Differential Privacy</category>
         
