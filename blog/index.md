@@ -2,6 +2,7 @@
 layout: full-width
 title: blog
 nav_order: 2
+permalink: /blog/
 ---
 
 
