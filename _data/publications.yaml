@@ -1,3 +1,10 @@
+- title: "Private Rate-Constrained Optimization with Applications to Fair Learning"
+  year: 2025
+  link: "https://arxiv.org/pdf/2505.22703"
+  authors: "Mohammad Yaghini*, Tudor Cebere*, Michael Menart, Aurélien Bellet, Nicolas Papernot"
+  type: "Preprint"
+  venue: "Arxiv"
+
 - title: "Tighter Privacy Auditing of DP-SGD in the Hidden State Threat Model"
   year: 2024
   link: "https://arxiv.org/pdf/2405.14457"
