@@ -20,9 +20,6 @@ jobs:
         with:
           ruby-version: '3.0'  # or a more recent version if you prefer
 
-      - name: Update RubyGems
-        run: gem update --system
-
       - name: Install Bundler
         run: gem install bundler
 
