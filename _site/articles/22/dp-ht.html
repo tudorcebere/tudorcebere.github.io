@@ -117,29 +117,6 @@ of DP</cite></footer></blockquote></div>
 
 <p>An “error” occurs when the adversary incorrectly guesses which dataset produced \(O\). To assess this, we look at the probability of error in a binary classification framework, where the false-positive rate (FPR) and false-negative rate (FNR) determine how successful the adversary is at telling the two datasets apart.</p>
 
-<table class="booktabs" style="margin: 0 auto;">
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: center"><strong>True Positive (TP)</strong></th>
-      <th style="text-align: center"><strong>False Positive (FP)</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>True Negative (TN)</strong></td>
-      <td style="text-align: center">TPR = \(\frac{TP}{TP + FN}\)</td>
-      <td style="text-align: center">FNR = \(\frac{FN}{TP + FN}\)</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>False Negative(FN)</strong></td>
-      <td style="text-align: center">FPR = \(\frac{FP}{TN + FP}\)</td>
-      <td style="text-align: center">TNR = \(\frac{TN}{TN + FP}\)</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>The seminal work of Wasserman<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">Wasserman, Larry, and Shuheng Zhou. “A statistical framework for differential privacy.” Journal of the American Statistical Association 105.489 (2010): 375-389. </span> and  Kairouz<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle" /><span class="sidenote">Kairouz, Peter, Sewoong Oh, and Pramod Viswanath. “The composition theorem for differential privacy.” International conference on machine learning. PMLR, 2015. </span> shows how \(\epsilon\)-DP bounds these error rates. Specifically, for an \(\epsilon\)-DP algorithm:</p>
 <div class="table-wrapper">
   <table class="booktabs" style="margin: 0 auto;">
     <thead>
@@ -153,26 +130,18 @@ of DP</cite></footer></blockquote></div>
       <tr>
         <td style="text-align: left"><strong>True Negative (TN)</strong></td>
         <td style="text-align: center">TPR = \(\frac{TP}{TP + FN}\)</td>
-        <td style="text-align: center">FNR = $$</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">\frac{FN}{TP + FN} $$</td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
+        <td style="text-align: center">FNR = \(\frac{FN}{TP + FN}\)</td>
       </tr>
       <tr>
         <td style="text-align: left"><strong>False Negative(FN)</strong></td>
         <td style="text-align: center">FPR = \(\frac{FP}{TN + FP}\)</td>
-        <td style="text-align: center">TNR = $$</td>
-      </tr>
-      <tr>
-        <td style="text-align: left">\frac{TN}{TN + FP} $$</td>
-        <td style="text-align: center"> </td>
-        <td style="text-align: center"> </td>
+        <td style="text-align: center">TNR = \(\frac{TN}{TN + FP}\)</td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<p>The seminal work of Wasserman<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">Wasserman, Larry, and Shuheng Zhou. “A statistical framework for differential privacy.” Journal of the American Statistical Association 105.489 (2010): 375-389. </span> and  Kairouz<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle" /><span class="sidenote">Kairouz, Peter, Sewoong Oh, and Pramod Viswanath. “The composition theorem for differential privacy.” International conference on machine learning. PMLR, 2015. </span> shows how \(\epsilon\)-DP bounds these error rates. Specifically, for an \(\epsilon\)-DP algorithm:</p>
 
 \[FNR + e^\epsilon * FPR &gt; 1\]
 
