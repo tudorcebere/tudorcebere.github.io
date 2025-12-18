@@ -5,8 +5,8 @@
     <description>A Jekyll theme for content-rich sites</description>
     <link>https://tudorcebere.github.io/</link>
     <atom:link href="https://tudorcebere.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Dec 2025 02:43:06 -0500</pubDate>
-    <lastBuildDate>Thu, 18 Dec 2025 02:43:06 -0500</lastBuildDate>
+    <pubDate>Thu, 18 Dec 2025 02:43:59 -0500</pubDate>
+    <lastBuildDate>Thu, 18 Dec 2025 02:43:59 -0500</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
@@ -137,7 +137,7 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;approximate-dp&quot;&gt;Approximate DP&lt;/h2&gt;
 
-&lt;p&gt;** Approximate DP ** is a relaxation of pure DP that introduces a parameter \(\delta\) to account for rare “catastrophic failure” events. This type of relaxation is common in cryptography to achieve practicality, as \(\epsilon\)-DP is both restrictive and hard on utility.  Keeping the notation and above \((\epsilon, \delta)\)-DP is defined as:&lt;/p&gt;
+&lt;p&gt;Approximate DP is a relaxation of pure DP that introduces a parameter \(\delta\) to account for rare “catastrophic failure” events. This type of relaxation is common in cryptography to achieve practicality, as \(\epsilon\)-DP is both restrictive and hard on utility.  Keeping the notation and above \((\epsilon, \delta)\)-DP is defined as:&lt;/p&gt;
 
 &lt;p&gt;&lt;label for=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;mf-id-whatever&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/blog_resources/dp_ht/download_(2).png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;
 
