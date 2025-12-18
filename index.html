@@ -1,13 +1,93 @@
----
-layout: full-width
-title: About
-nav_order: 1
----
-<h1 class="profile-name">Tudor Cebere</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>About</title>
+  <meta name="description" content="A Jekyll theme for content-rich sites">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="https://tudorcebere.github.io/">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Jekyll" href="https://tudorcebere.github.io/feed.xml" />
+</head>
+
+  <body class="full-width">
+    <header>
+  <nav class="group">
+    <a href="/">
+      <img class="badge" src="/assets/img/badge_1.png" alt="CH">
+    </a>
+    
+    
+      
+    
+      
+    
+      
+        
+          <a href="/css/print.css"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a class="active" href="/">About</a>
+        
+      
+    
+      
+        
+          <a href="/blog/">blog</a>
+        
+      
+    
+  </nav>
+</header>
+
+    <article>
+      <h1 class="profile-name">Tudor Cebere</h1>
 
 <div class="about-container">
   <div class="profile-photo-container">
-    <img src="{{ site.baseurl }}/assets/img/tudor.jpg" alt="My Photo" class="profile-photo">
+    <img src="/assets/img/tudor.jpg" alt="My Photo" class="profile-photo">
   </div>
   <div class="profile-text">
     <p> I am a third-year PhD student at Inria 🇫🇷, fortunate to be supervised by Aurélien Bellet. I am a recipient of the Google PhD Fellowship 2025 in Privacy, Safety, and Security. Since August 2024, I am also an Associate in Computer Science at Harvard, working with the OpenDP group. During my PhD, I have also completed research visits at the Vector Institute 🇨🇦 (hosted by Nicolas Papernot) and Harvard 🇺🇸 (hosted by the OpenDP group).
@@ -25,53 +105,159 @@ nav_order: 1
 <!-- Publications timeline will follow below -->
 <div class="publications-timeline">
   <table>
-    {% assign grouped_pubs = site.data.publications | group_by: "year" | sort: "name" | reverse %}
-    {% for group in grouped_pubs %}
-      {% assign num_items = group.items | size %}
-      {% for pub in group.items %}
-        {% if forloop.first %}
+    
+    
+      
+      
+        
           <tr>
-            <td class="year-cell" rowspan="{{ num_items }}">{{ group.name }}</td>
+            <td class="year-cell" rowspan="1">2025</td>
             <td class="paper-cell">
               <div class="paper-entry">
                 <!-- Paper Title -->
-                <a href="{{ pub.link }}" target="_blank" class="paper-title">
-                  <strong>{{ pub.title }}</strong>
+                <a href="https://arxiv.org/pdf/2505.22703" target="_blank" class="paper-title">
+                  <strong>Private Rate-Constrained Optimization with Applications to Fair Learning</strong>
                 </a>
                 <!-- Meta information: Authors, Venue (if any), and then Publication Type -->
-                {% assign authors_formatted = pub.authors | replace: "Tudor Cebere", "<span class='underline-author'>Tudor Cebere</span>" %}
+                
                 <span class="paper-meta">
-                  &nbsp;&ndash;&nbsp;{{ authors_formatted | safe }}
-                  {% if pub.venue and pub.venue != "" %}
-                    &nbsp;&ndash;&nbsp;<span class="venue">{{ pub.venue }}</span>
-                  {% endif %}
-                  &nbsp;&ndash;&nbsp;<span class="pub-tag {{ pub.type | downcase }}">{{ pub.type }}</span>
+                  &nbsp;&ndash;&nbsp;Mohammad Yaghini*, <span class='underline-author'>Tudor Cebere</span>*, Michael Menart, Aurélien Bellet, Nicolas Papernot
+                  
+                    &nbsp;&ndash;&nbsp;<span class="venue">Arxiv</span>
+                  
+                  &nbsp;&ndash;&nbsp;<span class="pub-tag preprint">Preprint</span>
                 </span>
               </div>
             </td>
           </tr>
-        {% else %}
+        
+      
+    
+      
+      
+        
+          <tr>
+            <td class="year-cell" rowspan="2">2024</td>
+            <td class="paper-cell">
+              <div class="paper-entry">
+                <!-- Paper Title -->
+                <a href="https://arxiv.org/pdf/2405.14457" target="_blank" class="paper-title">
+                  <strong>Tighter Privacy Auditing of DP-SGD in the Hidden State Threat Model</strong>
+                </a>
+                <!-- Meta information: Authors, Venue (if any), and then Publication Type -->
+                
+                <span class="paper-meta">
+                  &nbsp;&ndash;&nbsp;<span class='underline-author'>Tudor Cebere</span>, Aurélien Bellet, Nicolas Papernot
+                  
+                    &nbsp;&ndash;&nbsp;<span class="venue">Proceedings of the 13th International Conference on Learning Representations.</span>
+                  
+                  &nbsp;&ndash;&nbsp;<span class="pub-tag conference">Conference</span>
+                </span>
+              </div>
+            </td>
+          </tr>
+        
+      
+        
           <tr>
             <td class="paper-cell">
               <div class="paper-entry">
-                <a href="{{ pub.link }}" target="_blank" class="paper-title">
-                  <strong>{{ pub.title }}</strong>
+                <a href="https://hal.science/hal-04610635/document" target="_blank" class="paper-title">
+                  <strong>Confidential-DPproof: Confidential Proof of Differentially Private Training</strong>
                 </a>
-                {% assign authors_formatted = pub.authors | replace: "Tudor Cebere", "<span class='underline-author'>Tudor Cebere</span>" %}
+                
                 <span class="paper-meta">
-                  &nbsp;&ndash;&nbsp;{{ authors_formatted | safe }}
-                  {% if pub.venue and pub.venue != "" %}
-                    &nbsp;&ndash;&nbsp;<span class="venue">{{ pub.venue }}</span>
-                  {% endif %}
-                  &nbsp;&ndash;&nbsp;<span class="pub-tag {{ pub.type | downcase }}">{{ pub.type }}</span>
+                  &nbsp;&ndash;&nbsp;Ali Shahin Shamsabadi, Gefei Tan, <span class='underline-author'>Tudor Cebere</span>, Aurélien Bellet, Hamed Haddadi, Nicolas Papernot, Xiao Wang, Adrian Weller
+                  
+                    &nbsp;&ndash;&nbsp;<span class="venue">Proceedings of the 12th International Conference on Learning Representations.</span>
+                  
+                  &nbsp;&ndash;&nbsp;<span class="pub-tag conference (+spotlight)">Conference (+spotlight)</span>
                 </span>
               </div>
             </td>
           </tr>
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
+        
+      
+    
+      
+      
+        
+          <tr>
+            <td class="year-cell" rowspan="2">2021</td>
+            <td class="paper-cell">
+              <div class="paper-entry">
+                <!-- Paper Title -->
+                <a href="https://arxiv.org/pdf/2104.12385" target="_blank" class="paper-title">
+                  <strong>Syft 0.5: A platform for universally deployable structured transparency</strong>
+                </a>
+                <!-- Meta information: Authors, Venue (if any), and then Publication Type -->
+                
+                <span class="paper-meta">
+                  &nbsp;&ndash;&nbsp;Adam James Hall, Madhava Jay, <span class='underline-author'>Tudor Cebere</span>, Bogdan Cebere et al.
+                  
+                    &nbsp;&ndash;&nbsp;<span class="venue">Distributed and Private Machine Learning Workshop at the 9th International Conference on Learning Representations.</span>
+                  
+                  &nbsp;&ndash;&nbsp;<span class="pub-tag workshop">Workshop</span>
+                </span>
+              </div>
+            </td>
+          </tr>
+        
+      
+        
+          <tr>
+            <td class="paper-cell">
+              <div class="paper-entry">
+                <a href="https://arxiv.org/pdf/2104.00489" target="_blank" class="paper-title">
+                  <strong>Pyvertical: A vertical federated learning framework for multi-headed splitnn</strong>
+                </a>
+                
+                <span class="paper-meta">
+                  &nbsp;&ndash;&nbsp;Daniele Romanini, Adam James Hall, Pavlos Papadopoulos, Tom Titcombe, Abbas Ismail, <span class='underline-author'>Tudor Cebere</span>, Robert Sandmann, Robin Roehm, Michael A Hoeh
+                  
+                    &nbsp;&ndash;&nbsp;<span class="venue">Distributed and Private Machine Learning Workshop at the 9th International Conference on Learning Representations.</span>
+                  
+                  &nbsp;&ndash;&nbsp;<span class="pub-tag workshop">Workshop</span>
+                </span>
+              </div>
+            </td>
+          </tr>
+        
+      
+    
   </table>
 </div>
 
 
+
+    </article>
+    <span class="print-footer">About - clay harmon</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:tudorcebere@gmail.com"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//x.com/TCebere"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//scholar.google.com/citations?user=uunZxOUAAAAJ&hl=en"><span class="icon-google2"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/tudorcebere"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="//www.linkedin.com/in/ioan-tudor-cebere-b18b0713a/"><span class="icon-linkedin"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2025 &nbsp;&nbsp;CLAY HARMON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
