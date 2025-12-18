@@ -5,8 +5,8 @@
     <description>A Jekyll theme for content-rich sites</description>
     <link>https://tudorcebere.github.io/</link>
     <atom:link href="https://tudorcebere.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Dec 2025 02:36:37 -0500</pubDate>
-    <lastBuildDate>Thu, 18 Dec 2025 02:36:37 -0500</lastBuildDate>
+    <pubDate>Thu, 18 Dec 2025 02:43:06 -0500</pubDate>
+    <lastBuildDate>Thu, 18 Dec 2025 02:43:06 -0500</lastBuildDate>
     <generator>Jekyll v4.4.1</generator>
     
       <item>
@@ -91,6 +91,39 @@ of DP&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;&lt;/div&gt;
 &lt;/table&gt;
 
 &lt;p&gt;The seminal work of Wasserman&lt;label for=&quot;1&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;1&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Wasserman, Larry, and Shuheng Zhou. “A statistical framework for differential privacy.” Journal of the American Statistical Association 105.489 (2010): 375-389. &lt;/span&gt; and  Kairouz&lt;label for=&quot;2&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;2&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Kairouz, Peter, Sewoong Oh, and Pramod Viswanath. “The composition theorem for differential privacy.” International conference on machine learning. PMLR, 2015. &lt;/span&gt; shows how \(\epsilon\)-DP bounds these error rates. Specifically, for an \(\epsilon\)-DP algorithm:&lt;/p&gt;
+&lt;div class=&quot;table-wrapper&quot;&gt;
+  &lt;table class=&quot;booktabs&quot; style=&quot;margin: 0 auto;&quot;&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;True Positive (TP)&lt;/strong&gt;&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;False Positive (FP)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;True Negative (TN)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;TPR = \(\frac{TP}{TP + FN}\)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;FNR = $$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;\frac{FN}{TP + FN} $$&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;False Negative(FN)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;FPR = \(\frac{FP}{TN + FP}\)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;TNR = $$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;\frac{TN}{TN + FP} $$&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt; &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
 
 \[FNR + e^\epsilon * FPR &amp;gt; 1\]
 
