@@ -1,6 +1,3 @@
----
-layout: null
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +15,7 @@ layout: null
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--bg-gray);
@@ -43,9 +40,9 @@ layout: null
         }
 
         .logo-bar img {
-            height: 45px;
+            height: 50px;
             width: auto;
-            object-fit: contain;
+            display: block;
         }
 
         header {
@@ -55,7 +52,7 @@ layout: null
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: var(--opendp-blue);
             margin: 0 0 10px 0;
             letter-spacing: -0.02em;
@@ -82,15 +79,9 @@ layout: null
             margin-bottom: 8px;
         }
 
-        .meta-item p {
-            margin: 0;
-            font-size: 0.95rem;
-        }
+        .meta-item p { margin: 0; font-size: 0.95rem; }
 
-        .tag-cloud {
-            margin: 20px 0;
-        }
-
+        .tag-cloud { margin: 20px 0; }
         .tag {
             display: inline-block;
             background: #edf2f7;
@@ -110,11 +101,6 @@ layout: null
             padding-left: 15px;
         }
 
-        .section-content {
-            font-size: 1.05rem;
-            color: var(--text-light);
-        }
-
         .focus-area {
             background: #fdfdfd;
             border: 1px solid var(--border-color);
@@ -123,11 +109,7 @@ layout: null
             margin-bottom: 20px;
         }
 
-        .focus-area h5 {
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-        }
+        .focus-area h5 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); }
 
         .apply-box {
             margin-top: 50px;
@@ -145,32 +127,23 @@ layout: null
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.2s;
         }
 
-        .btn:hover {
-            background: #003d75;
-        }
-
-        a {
-            color: var(--opendp-blue);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
+        a { color: var(--opendp-blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
         footer {
             text-align: center;
             margin-top: 40px;
             font-size: 0.8rem;
             color: #a0aec0;
+            padding-bottom: 40px;
         }
 
         @media (max-width: 600px) {
             .container { padding: 30px 20px; }
             h1 { font-size: 1.8rem; }
+            .logo-bar { flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
@@ -178,8 +151,8 @@ layout: null
 
 <div class="container">
     <div class="logo-bar">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Inria_logo.svg/512px-Inria_logo.svg.png" alt="Inria Logo">
-        <img src="https://opendp.org/img/opendp-logo.png" alt="OpenDP Logo">
+        <img src="https://www.dataia.eu/sites/default/files/2024-03/inr_logo_rouge.png" alt="Inria Logo">
+        <img src="https://docs.opendp.org/en/stable/_static/opendp-logo.png" alt="OpenDP Logo">
     </div>
 
     <header>
@@ -196,13 +169,13 @@ layout: null
         <div class="meta-item">
             <h4>Duration</h4>
             <p>Up to 6 months</p>
-            <p>Starting Spring 2026</p>
+            <p>Starting Spring/Summer 2026</p>
         </div>
         <div class="meta-item">
             <h4>Supervisors</h4>
-            <p><a href="mailto:tudor.cebere @inria.fr">Tudor Cebere</a> (Inria)</p>
-            <p><a href="https://github.com/mshoemate">Michael Shoemate</a> (Harvard/OpenDP)</p>
-            <p><a href="https://researchers.lille.inria.fr/abellet/">Aurélien Bellet</a> (Inria)</p>
+            <p><a href="mailto:tudor.cebere@inria.fr">Tudor Cebere</a> (Inria)</p>
+            <p><a href="mailto:shoematem@g.harvard.edu">Michael Shoemate</a> (OpenDP/Harvard)</p>
+            <p><a href="mailto:aurelien.bellet@inria.fr">Aurélien Bellet</a> (Inria)</p>
         </div>
     </div>
 
@@ -214,56 +187,47 @@ layout: null
         <span class="tag">Statistics</span>
     </div>
 
-    <section class="section-content">
-        <h3>The Mission</h3>
-        <p>Data-driven research is vital for modern decision-making, yet it often presents significant privacy risks when handling individual information. <strong>Differential Privacy (DP)</strong> has emerged as the gold standard for addressing these risks, providing a mathematically rigorous framework to protect privacy while maintaining statistical utility.</p>
+    <section>
+        <h3>Context</h3>
+        <p>In many organizations, data plays a central role in research and decision-making. However, analyzing data that contains individual information creates serious privacy risks. <strong>Differential Privacy (DP)</strong> addresses this by adding calibrated statistical noise, ensuring that an individual's presence does not meaningfully change results.</p>
         
-        <p>This internship focuses on contributing to the <a href="https://opendp.org/">OpenDP Library</a>—a high-profile collaboration between Harvard University and the global research community. The library is built in <strong>Rust</strong> for safety and performance, with a <strong>Python</strong> ecosystem designed for data scientists worldwide.</p>
+        
+
+        <p>The <a href="https://opendp.org/">OpenDP Library</a> is a collaborative project providing tools for government and academia to produce private analyses. Built in <strong>Rust</strong> for performance and <strong>Python</strong> for accessibility, it bridges the gap between theoretical research and real-world software engineering.</p>
     </section>
 
-    <h3>Key Focus Areas</h3>
+    <h3>Key Objectives</h3>
     
     <div class="focus-area">
-        <h5>1. Privacy Auditing Frameworks</h5>
-        <p>You will adapt and integrate novel auditing frameworks to empirically measure privacy leakage. This involves benchmarking existing mechanisms against theoretical bounds to ensure real-world implementations match their mathematical guarantees.</p>
+        <h5>1. Privacy Auditing</h5>
+        <p>Adapt and integrate a novel auditing framework to empirically estimate privacy leakage and benchmark mechanisms against theoretical bounds.</p>
     </div>
 
     <div class="focus-area">
-        <h5>2. Research & Theoretical Contributions</h5>
+        <h5>2. Research & Theory</h5>
         <ul>
-            <li><strong>Advanced Composition:</strong> Implement adaptive concurrent composition for zCDP and Rényi Differential Privacy.</li>
-            <li><strong>Hypothesis Testing:</strong> Develop DP-compliant statistics for difference of means and independence tests.</li>
-            <li><strong>Benchmarking:</strong> Explore utility trade-offs for regression models and confidence intervals.</li>
+            <li><strong>Advanced Composition:</strong> Implement adaptive composition for zCDP/RDP.</li>
+            <li><strong>Hypothesis Testing:</strong> Develop DP statistics for difference of means and independence tests.</li>
+            <li><strong>Benchmarking:</strong> Explore utility trade-offs in regression models.</li>
         </ul>
     </div>
 
     <div class="focus-area">
-        <h5>3. Engineering & Ecosystem Integration</h5>
+        <h5>3. Engineering & Integration</h5>
         <ul>
-            <li><strong>Mechanism Design:</strong> Implement truncated noise and interval exponential mechanisms.</li>
-            <li><strong>Polars Integration:</strong> Help bridge the gap between OpenDP and the <a href="https://pola.rs/">Polars DataFrame</a> library for high-performance data processing.</li>
-            <li><strong>New Frontiers:</strong> Investigate graph-based domains and continual observation mechanisms.</li>
+            <li><strong>Mechanism Implementation:</strong> Primitive mechanisms like truncated noise and interval exponential.</li>
+            <li><strong>Polars Integration:</strong> Enhance the high-performance integration with the <a href="https://pola.rs/">Polars DataFrame</a> library.</li>
         </ul>
     </div>
-
-    <section class="section-content">
-        <h3>Who You Are</h3>
-        <ul>
-            <li>A student in <strong>Computer Science, Mathematics, or Statistics</strong>.</li>
-            <li>Proficient in <strong>Python</strong>. Knowledge of <strong>Rust</strong> is a significant advantage.</li>
-            <li>Excited by the intersection of rigorous mathematical proofs and high-quality software engineering.</li>
-            <li>Prior exposure to Differential Privacy is a strong plus, but an eagerness to learn is essential.</li>
-        </ul>
-    </section>
 
     <div class="apply-box">
-        <h4>Ready to contribute?</h4>
-        <p>Join us in Montpellier to build the future of privacy-preserving data science.</p>
-        <a href="mailto:tudor.cebere @inria.fr;shoematem @g.harvard.edu;aurelien.bellet @inria.fr?subject=Internship Application: OpenDP" class="btn">Apply via Email</a>
+        <h4>Interested in this position?</h4>
+        <p>A successful internship may lead to a Research Engineering role or a PhD thesis.</p>
+        <a href="mailto:tudor.cebere@inria.fr;shoematem@g.harvard.edu;aurelien.bellet@inria.fr?subject=Internship Application: OpenDP" class="btn">Apply via Email</a>
     </div>
 
     <footer>
-        <p>Inria PreMeDICal Team &copy; 2025. This project supports the OpenDP community initiative.</p>
+        <p>Inria PreMeDICal Team &copy; 2025</p>
     </footer>
 </div>
 
