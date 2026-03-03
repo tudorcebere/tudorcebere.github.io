@@ -9,8 +9,8 @@
   year: 2026
   link: "https://arxiv.org/pdf/2602.02819"
   authors: "Mathieu Even, Clément Berenfeld, Linus Bleistein, Tudor Cebere, Julie Josse, Aurélien Bellet"
-  type: "Conference"
-  venue: "Preprint"
+  type: "Preprint"
+  venue: "arXiv"
 
 - title: "Private Rate-Constrained Optimization with Applications to Fair Learning"
   year: 2025
