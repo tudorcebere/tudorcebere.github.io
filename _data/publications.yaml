@@ -1,9 +1,23 @@
+- title: "Privacy in Theory, Bugs in Practice: Grey-Box Auditing of Differential Privacy Libraries"
+  year: 2026
+  link: "https://arxiv.org/pdf/2602.17454"
+  authors: "Tudor Cebere, David Erb, Damien Desfontaines, Aurélien Bellet, Jack Fitzsimons"
+  type: "Conference"
+  venue: "PoPETS 2026.3"
+
+- title: "Membership Inference Attacks from Causal Principles"
+  year: 2026
+  link: "https://arxiv.org/pdf/2602.02819"
+  authors: "Mathieu Even, Clément Berenfeld, Linus Bleistein, Tudor Cebere, Julie Josse, Aurélien Bellet"
+  type: "Conference"
+  venue: "Preprint"
+
 - title: "Private Rate-Constrained Optimization with Applications to Fair Learning"
   year: 2025
   link: "https://arxiv.org/pdf/2505.22703"
   authors: "Mohammad Yaghini*, Tudor Cebere*, Michael Menart, Aurélien Bellet, Nicolas Papernot"
-  type: "Preprint"
-  venue: "Arxiv"
+  type: "Conference"
+  venue: "ICLR 2026"
 
 - title: "Tighter Privacy Auditing of DP-SGD in the Hidden State Threat Model"
   year: 2024
