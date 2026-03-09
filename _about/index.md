@@ -11,6 +11,7 @@ title: About
   <div class="profile-text">
     <p>👋 I am third-year PhD student at Inria 🇫🇷, supervised by Aurélien Bellet. During my PhD, I visited the Vector Institute 🇨🇦 hosted by Nicolas Papernot and Harvard hosted by the OpenDP group.</p>
     <p><strong>Research & Interests</strong>: I am interested in differential privacy (DP) and its applications in making useful machine learning models with privacy guarantees.</p>
+    <p>📄 You can find my latest <strong><a href="{{ site.baseurl }}/assets/cv_2026.pdf" target="_blank">CV here</a></strong>.</p>
   </div>
 </div>
 
