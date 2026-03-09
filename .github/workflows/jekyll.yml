@@ -23,9 +23,9 @@ jobs:
       - name: Install Bundler
         run: gem install bundler
 
-      - name: Install your gems
+      - name: Install dependencies
         run: |
-          gem install jekyll rake
+          bundle install
 
       - name: Configure Git
         run: |
