@@ -19,13 +19,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-
-      - name: Install dependencies
-        run: |
-          gem update --system
-          gem install bundler
-          bundle update --bundler
-          bundle install
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Configure Git
         run: |
