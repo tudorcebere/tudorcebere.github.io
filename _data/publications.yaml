@@ -1,9 +1,17 @@
+- title: "Privacy Auditing with Zero (0) Training Run"
+  year: 2026
+  link: "https://arxiv.org/pdf/2605.14591"
+  authors: "Tudor Cebere*, Mathieu Even*, Linus Bleistein, Aurélien Bellet"
+  type: "Preprint"
+  venue: "arXiv"
+
 - title: "Privacy in Theory, Bugs in Practice: Grey-Box Auditing of Differential Privacy Libraries"
   year: 2026
   link: "https://arxiv.org/pdf/2602.17454"
+  code: "https://github.com/ObliviousAI/dp-recorder"
   authors: "Tudor Cebere, David Erb, Damien Desfontaines, Aurélien Bellet, Jack Fitzsimons"
   type: "Conference"
-  venue: "PoPETS 2026.3"
+  venue: "The 26th Privacy Enhancing Technologies Symposium"
 
 - title: "Membership Inference Attacks from Causal Principles"
   year: 2026
@@ -15,9 +23,10 @@
 - title: "Private Rate-Constrained Optimization with Applications to Fair Learning"
   year: 2025
   link: "https://arxiv.org/pdf/2505.22703"
+  code: "https://github.com/cleverhans-lab/dp-raco"
   authors: "Mohammad Yaghini*, Tudor Cebere*, Michael Menart, Aurélien Bellet, Nicolas Papernot"
   type: "Conference"
-  venue: "ICLR 2026"
+  venue: "Proceedings of the 14th International Conference on Learning Representations."
 
 - title: "Tighter Privacy Auditing of DP-SGD in the Hidden State Threat Model"
   year: 2024

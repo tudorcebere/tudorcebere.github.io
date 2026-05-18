@@ -43,6 +43,11 @@ title: About
                     &nbsp;&ndash;&nbsp;<span class="venue">{{ pub.venue }}</span>
                   {% endif %}
                   &nbsp;&ndash;&nbsp;<span class="pub-tag {{ pub.type | downcase }}">{{ pub.type }}</span>
+                  {% if pub.code %}
+                    &nbsp;&ndash;&nbsp;<a href="{{ pub.code }}" target="_blank" class="pub-tag code">
+                      <i class="icon-github"></i> Code
+                    </a>
+                  {% endif %}
                 </span>
               </div>
             </td>
@@ -61,6 +66,11 @@ title: About
                     &nbsp;&ndash;&nbsp;<span class="venue">{{ pub.venue }}</span>
                   {% endif %}
                   &nbsp;&ndash;&nbsp;<span class="pub-tag {{ pub.type | downcase }}">{{ pub.type }}</span>
+                  {% if pub.code %}
+                    &nbsp;&ndash;&nbsp;<a href="{{ pub.code }}" target="_blank" class="pub-tag code">
+                      <i class="icon-github"></i> Code
+                    </a>
+                  {% endif %}
                 </span>
               </div>
             </td>

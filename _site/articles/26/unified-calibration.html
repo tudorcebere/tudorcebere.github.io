@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Open Thoughts on: A Unifying Theory of Distance from Calibration</title>
+  <meta name="description" content="">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="https://tudorcebere.github.io/articles/26/unified-calibration">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Jekyll" href="https://tudorcebere.github.io/feed.xml" />
+</head>
+
+  <body>
+    <header>
+  <nav class="group">
+    <a href="/">
+      <img class="badge" src="/assets/img/badge_1.png" alt="CH">
+    </a>
+    
+    
+      
+    
+      
+    
+      
+        
+          <a href="/css/print.css"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="/">About</a>
+        
+      
+    
+      
+        
+          <a href="/blog/">blog</a>
+        
+      
+    
+  </nav>
+</header>
+
+    <article class="group">
+      <h1>Open Thoughts on: A Unifying Theory of Distance from Calibration</h1>
+<p class="subtitle">May 18, 2026</p>
+
+<!--more-->
+
+<p>Recently I was hoping to quantify if my classifier has the appropriate amount of confidence in its prediction given the data. Ideally, I wanted to get a guarantee on the worst-case misscalibration it could have. I was surprised that there was not a lot of consesus on how to measure calibration historically.</p>
+
+<p>Jarosław Błasiok et al. <label for="6" class="margin-toggle sidenote-number"></label><input type="checkbox" id="6" class="margin-toggle" /><span class="sidenote">Błasiok, Jarosław, et al. “A unifying theory of distance from calibration.” Proceedings of the 55th Annual ACM Symposium on Theory of Computing. 2023. </span> starts by demonstrating exactly why some of the existing metrics, like Expected Calibration Error (ECE) are flawed. I agree that in the finite-sample regime, it doesn’t seem possible to properly estimate ECE without relying on the discretization or binning of the output of our predictor \(f\). When reviewing the literature on this, I was indeed worried that the quality of the calibration score would end up depending quite a lot on the chosen binning strategy.</p>
+
+<p>They also give a great example of a predictor that is perfectly calibrated under ECE but useless utility-wise and, more interesting, non-trivial predictors take an penalty in their calibration score. The authors convinced me that ECE is structurally flawed and hard to estimate, and I didn’t expect much from its heuristic variants up to this point. They continue by promising to create a rigorous setup to measure calibration, and then propose new algorithms and recover some of the existing ones, proving that they are proper.</p>
+
+<p>First, they introduce the <em>true distance to calibration</em>, which measures the \(l_1\) distance between our classifier \(f\) and the closest perfectly calibrated predictor \(g\). Some initial thoughts here (which will probably be addressed by the time I finish the paper): Why \(l_1\) and not some divergence such as KL? <label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle" /><span class="sidenote">The authors show in Lemma 4.4 that the set of consistent calibration measures is identical across all bounded \(l_p\) metrics because they are polynomially related. Thus, \(l_1\) is a robust and convenient choice, whereas KL divergence is not a true metric and can blow up to infinity. </span>  The idea of the “closest” calibrated predictor suggests there can be <em>many</em> perfectly calibrated predictors. Up until now, I hadn’t spent much time thinking about this, but I guess it makes a lot of sense.  However, the most pressing question is: how can we know \(g\) in practice? (Otherwise, we would most likely just use it directly). <label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle" /><span class="sidenote">The paper formalizes a separation between <em>Sample Access</em> (knowing the true underlying domain distribution) and <em>Prediction-Only Access</em> (just having the joint distribution of predictions and labels). The true distance to calibration requires Sample Access, which we almost never have in practice. </span> And tehn, while this \(g\) is calibrated, does that say anything about its usefulness? How do we dodge the trap of the previous example? In other words, maybe we dont care about the distance to a calibrated-but-useless classifier.</p>
+
+<p>To address these estimation challenges, they propose a set of requirements for calibration proxy estimators: <em>completeness</em> (if the classifier is perfectly calibrated, the distance should be 0) and <em>soundness</em> (if it’s not, there is a positive distance). 
+They proceed by discussing that a <em>consistent</em> calibration measure must be polynomially tied to quantities related to the true calibration distance.</p>
+
+<p>I think this is a sensible way of defining it, as it allows you to introduce a way of comparing different “common-sense” estimators. My own nitpicking here is that it doesn’t necessarily give you a strict ordering between metrics in practice, but maybe that’s not strictly necessary. <label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle" /><span class="sidenote">They prove an information-theoretic barrier here: under the Prediction-Only Access model, it is impossible to get an approximation better than quadratic to the true distance. </span> With the formalism cleared up and a solid intuition for why the true distance is uncomputable directly, they seek to introduce computable quantities that are consistently related to it.</p>
+
+<p>They first introduce the Interval Calibration estimator (intCE), which is essentially standard binned-ECE but with a penalty for a wide selection of bins. They show that this penalty introduces a proper, consistent quadratic approximation of the true distance to calibration.</p>
+
+<p>A second approach is Smooth Calibration (smCE), which they show is equivalent (up to constant factors) to the minimal amount of changes required in our predictions to achieve perfect calibration. They (re?)introduce the idea of <em>weighted calibration</em>, where different partitions suffer some reweighting based on a function \(w\) drawn from a larger set of weighting functions \(W\). The calibration error is the maximum penalty assigned by any \(w\) in this family.  For their smooth calibration technique, \(W\) is the family of all bounded 1-Lipschitz functions. <label for="4" class="margin-toggle sidenote-number"></label><input type="checkbox" id="4" class="margin-toggle" /><span class="sidenote">It can actually be computed efficiently via a linear program with \(\mathcal{O}(n)\) variables in the number of datapoints. </span></p>
+
+<p>Then they proceed to introduce another family \(W\), where \(W\) is in a Reproducing Kernel Hilbert Space (RKHS), defining the Kernel Calibration Error (kCE). They show that using a Laplace kernel introduces a valid, theoretically consistent calibration error that is also efficiently computable. <label for="5" class="margin-toggle sidenote-number"></label><input type="checkbox" id="5" class="margin-toggle" /><span class="sidenote">They also show the the Gaussian kernel fails the requirements for a proper calibration metric. </span></p>
+
+<p>This paper was a gem to read, as it cleanly introduces a methodology to measure the quantity of interest that I was initially going after, calibration. How I will end up using this to achieve my guarantee on the worst-case misscalibration is yet to be discovered.</p>
+
+
+
+    </article>
+    <span class="print-footer">Open Thoughts on: A Unifying Theory of Distance from Calibration - May 18, 2026 - clay harmon</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:tudorcebere@gmail.com"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//x.com/TCebere"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//scholar.google.com/citations?user=uunZxOUAAAAJ&hl=en"><span class="icon-google2"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/tudorcebere"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="//www.linkedin.com/in/ioan-tudor-cebere-b18b0713a/"><span class="icon-linkedin"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2026 &nbsp;&nbsp;CLAY HARMON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
