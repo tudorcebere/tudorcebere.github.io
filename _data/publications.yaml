@@ -1,3 +1,11 @@
+- title: "Lumberjack: Better Differentially Private Random Forests through Heavy Hitter Detection in Trees"
+  year: 2026
+  link: "https://arxiv.org/abs/2605.22756"
+  code: "https://github.com/daviderb/Lumberjack"
+  authors: "Christian Janos Lebeda*, David Erb*, Tudor Cebere, Aurélien Bellet"
+  type: "Preprint"
+  venue: "arXiv"
+
 - title: "Privacy Auditing with Zero (0) Training Run"
   year: 2026
   link: "https://arxiv.org/pdf/2605.14591"
