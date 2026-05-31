@@ -27,12 +27,14 @@ nav_order: 1
 <div class="publications-timeline">
   <table>
     {% assign grouped_pubs = site.data.publications | group_by: "year" | sort: "name" | reverse %}
+    {% assign paper_number = site.data.publications | size %}
     {% for group in grouped_pubs %}
       {% assign num_items = group.items | size %}
       {% for pub in group.items %}
         {% if forloop.first %}
           <tr>
             <td class="year-cell" rowspan="{{ num_items }}">{{ group.name }}</td>
+            <td class="paper-number-cell">{{ paper_number }}.</td>
             <td class="paper-cell">
               <div class="paper-entry">
                 <!-- Paper Title -->
@@ -58,6 +60,7 @@ nav_order: 1
           </tr>
         {% else %}
           <tr>
+            <td class="paper-number-cell">{{ paper_number }}.</td>
             <td class="paper-cell">
               <div class="paper-entry">
                 <a href="{{ pub.link }}" target="_blank" class="paper-title">
@@ -80,9 +83,9 @@ nav_order: 1
             </td>
           </tr>
         {% endif %}
+        {% assign paper_number = paper_number | minus: 1 %}
       {% endfor %}
     {% endfor %}
   </table>
 </div>
-
 

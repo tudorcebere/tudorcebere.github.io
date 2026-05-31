@@ -545,37 +545,65 @@ hr.slender {
 /* Table for grouping publications by year */
 .publications-timeline table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 0;
 }
 
 .publications-timeline .year-cell,
+.publications-timeline .paper-number-cell,
 .publications-timeline .paper-cell {
-  padding: 4px 8px;
+  padding: 0.55rem 0.45rem 0.65rem;
   vertical-align: top;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
 }
 
 .publications-timeline .year-cell {
   text-align: right;
   font-weight: bold;
+  width: 4.5rem;
+  color: rgba(17, 17, 17, 0.62);
+  letter-spacing: 0.03em;
+  padding-right: 0.85rem;
+}
+
+.publications-timeline .paper-number-cell {
+  width: 2.4rem;
+  padding-left: 0.15rem;
+  padding-right: 0.5rem;
+  text-align: right;
+  font-family: $sans-font;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: rgba(17, 17, 17, 0.5);
+}
+
+.publications-timeline .paper-cell {
+  padding-left: 0.35rem;
+  padding-right: 1.4rem;
 }
 
 /* Each publication entry */
 .paper-entry {
-  margin-bottom: 0x;
+  max-width: 66rem;
+  padding: 0.08rem 0 0.18rem;
+  line-height: 1.55;
 }
 
-/* Paper title: stays inline and on one line if possible */
+/* Paper title: inline with metadata, but allowed to wrap cleanly. */
 .paper-title {
   display: inline;
-  white-space: nowrap;
+  white-space: normal;
+  color: #8f2f24;
 }
 
 /* Meta information: inline, wrapping naturally if needed */
 .paper-meta {
   display: inline;
   white-space: normal;
-  font-size: 0.9em;
-  line-height: 1.4;
+  font-size: 0.92em;
+  line-height: 1.5;
+  color: rgba(17, 17, 17, 0.78);
 }
 
 /* Optional spacing for inline meta items */
@@ -591,10 +619,12 @@ hr.slender {
 /* Publication tag styling */
 .pub-tag {
   display: inline-block;
-  padding: 2px 6px;
+  padding: 1px 6px 2px;
   border-radius: 4px;
   font-size: 0.8em;
   margin-left: 0px;
+  line-height: 1.35;
+  vertical-align: 0.08em;
 }
 
 /* Example colors for different publication types */
