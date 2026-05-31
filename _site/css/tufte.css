@@ -230,7 +230,7 @@ th, td { font-size: 1.2rem; line-height: 1.71428571; }
 
 /* -- End of Table Styling section --*/
 /* Basic Layout stuff --*/
-article { position: relative; padding: 1 rem 0rem 2.5rem 0rem; }
+article { position: relative; padding: 1rem 0rem 2.5rem 0rem; }
 
 section { padding-top: 1rem; padding-bottom: 1rem; }
 
@@ -262,7 +262,7 @@ p, footer, div.table-wrapper, .MJXc-display, .MathJax { width: 55%; }
 
 div.table-wrapper, table { overflow-x: auto; }
 
-@media screen and (max-width: 760px) { p, footer { width: 90%; } pre code { width: 87.5%; } ul { width: 85%; } figure { max-width: 90%; } figcaption, figure.fullwidth figcaption { margin-right: 0%; max-width: none; } blockquote p, blockquote footer, div.epigraph > blockquote > footer, .MJXc-display { width: 80%; padding-left: 5%; padding-right: 5%; } }
+@media screen and (max-width: 760px) { *, *:before, *:after { box-sizing: border-box; } html { font-size: 13px; } body, body.full-width { width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; margin-left: 0; margin-right: 0; max-width: none; overflow-x: hidden; } article { width: 100%; padding-top: 0.5rem; } h1 { font-size: 2.2rem; line-height: 1.08; } h2 { font-size: 1.8rem; line-height: 1.15; } h3 { font-size: 1.55rem; line-height: 1.2; } p, footer, div.table-wrapper, .MJXc-display, .MathJax, .full-width article p { width: 100%; } p, li { padding-right: 0; } ul, ol { width: 100%; padding-left: 1.25rem; padding-right: 0; } pre, pre code { width: 100%; } figure, figure img.maincolumn { max-width: 100%; } figcaption, figure.fullwidth figcaption { margin-right: 0%; max-width: none; width: 100%; } blockquote p, blockquote footer, div.epigraph > blockquote > footer, .MJXc-display { width: 100%; padding-left: 1rem; padding-right: 1rem; } }
 
 .marginnote code, .sidenote code { font-size: 1rem; }
 
@@ -280,7 +280,7 @@ label.sidenote-number { display: inline; }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
-@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: #a00000; } .sidenote, .marginnote { display: none; } .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote { display: block; float: left; left: 1rem; clear: both; width: 95%; margin: 1rem 2.5%; vertical-align: baseline; position: relative; } label { cursor: pointer; } pre, pre code, p code, p pre code { width: 90%; padding: 0; } .table-caption { display: block; float: right; clear: both; width: 98%; margin-top: 1rem; margin-bottom: 0.5rem; margin-left: 1%; margin-right: 1%; vertical-align: baseline; position: relative; } div.table-wrapper, table, table.booktabs { width: 85%; } div.table-wrapper { border-right: 1px solid #efefef; } img { max-width: 100%; } figcaption.maincolumn-figure, figure.fullwidth figcaption { float: none; text-align: center; } figure.fullwidth figcaption { margin-left: 0; } }
+@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: #a00000; } .sidenote, .marginnote { display: none; } .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote { display: block; float: left; left: 0; clear: both; width: 100%; margin: 1rem 0; vertical-align: baseline; position: relative; } label { cursor: pointer; } pre, pre code, p code, p pre code { width: 100%; padding: 0; } .table-caption { display: block; float: none; clear: both; width: 100%; margin-top: 1rem; margin-bottom: 0.5rem; margin-left: 0; margin-right: 0; vertical-align: baseline; position: relative; } div.table-wrapper, table, table.booktabs { width: 100%; } div.table-wrapper { border-right: 1px solid #efefef; overflow-x: auto; } img { max-width: 100%; } figcaption.maincolumn-figure, figure.fullwidth figcaption { float: none; text-align: center; } figure.fullwidth figcaption { margin-left: 0; } }
 
 /*--- End of Basic Layout stuff from tufte.css ---*/
 /* -- Jekyll specific styling --*/
@@ -297,6 +297,8 @@ nav.group a.active:after { content: "\000a0\0003e"; }
 header > nav a { font-size: 1.2rem; font-family: "Gill Sans", "Gill Sans MT", "Gotham Narrow", "Lato", Calibri, sans-serif; letter-spacing: 0.15em; text-transform: uppercase; color: #a00000; padding-top: 1.5rem; text-decoration: none; display: inline-block; float: left; margin-top: 0; margin-bottom: 0; padding-right: 2rem; vertical-align: baseline; }
 
 header > nav a img { height: 5rem; position: relative; max-width: 100%; top: -1.5rem; }
+
+@media screen and (max-width: 760px) { header > nav.group, body footer { width: 100%; padding-top: 1rem; } header > nav a { float: none; padding-top: 0.4rem; padding-right: 1rem; padding-bottom: 0.4rem; letter-spacing: 0.08em; line-height: 1.3; } header > nav a img { height: 3.5rem; top: 0; vertical-align: middle; } }
 
 ul.footer-links, .credits { list-style: none; text-align: center; margin: 0 auto; }
 
@@ -395,6 +397,8 @@ hr.slender { border: 0; height: 1px; margin-top: 1.4rem; margin-bottom: 1.4rem; 
 
 /* Venue styling */
 .venue { font-size: 0.85em; font-weight: bold; margin-left: 0px; }
+
+@media screen and (max-width: 760px) { body.full-width { width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; } .full-width article p { width: 100%; } .content-listing, ul.content-listing li.listing { width: 100%; padding-left: 0; padding-right: 0; } .listing, .listing h3 { display: block; } .profile-name { font-size: 2.4em; text-align: left; } .about-container { display: block; margin: 1.5rem 0 2rem; } .profile-photo-container { margin-bottom: 1.5rem; } .profile-photo { width: 100%; max-width: 280px; } .publications-section-title { font-size: 2em; margin-top: 2rem; } .publications-timeline { overflow-x: auto; } .publications-timeline table { min-width: 0; } .publications-timeline .year-cell, .publications-timeline .paper-cell { display: block; width: 100%; padding-left: 0; padding-right: 0; text-align: left; } .publications-timeline .year-cell { padding-top: 1rem; padding-bottom: 0.25rem; } .paper-entry { line-height: 1.5; } .paper-meta { display: block; margin-top: 0.35rem; } }
 
 @media print { * { -webkit-transition: none !important; transition: none !important; } *, *:before, *:after { background: transparent !important; box-shadow: none !important; text-shadow: none !important; } @page { margin: 0.75in 0.5in 0.75in 0.5in;
     orphans: 4;
