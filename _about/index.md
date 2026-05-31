@@ -30,10 +30,10 @@ title: About
         {% if forloop.first %}
           <tr>
             <td class="year-cell" rowspan="{{ num_items }}">{{ group.name }}</td>
-            <td class="paper-number-cell">{{ paper_number }}.</td>
             <td class="paper-cell">
               <div class="paper-entry">
                 <!-- Paper Title -->
+                <span class="paper-number">{{ paper_number }}.</span>
                 <a href="{{ pub.link }}" target="_blank" class="paper-title">
                   <strong>{{ pub.title }}</strong>
                 </a>
@@ -56,9 +56,9 @@ title: About
           </tr>
         {% else %}
           <tr>
-            <td class="paper-number-cell">{{ paper_number }}.</td>
             <td class="paper-cell">
               <div class="paper-entry">
+                <span class="paper-number">{{ paper_number }}.</span>
                 <a href="{{ pub.link }}" target="_blank" class="paper-title">
                   <strong>{{ pub.title }}</strong>
                 </a>
@@ -84,4 +84,3 @@ title: About
     {% endfor %}
   </table>
 </div>
-

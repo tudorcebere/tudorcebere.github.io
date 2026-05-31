@@ -355,24 +355,22 @@ hr.slender { border: 0; height: 1px; margin-top: 1.4rem; margin-bottom: 1.4rem; 
 .publications-section-title { font-size: 2.5em; text-align: Left; margin-top: 40px; margin-bottom: 20px; }
 
 /* Table for grouping publications by year */
-.publications-timeline table { width: 100%; border-collapse: separate; border-spacing: 0; border: 0; }
+.publications-timeline table { width: 100%; border-collapse: collapse; }
 
-.publications-timeline .year-cell, .publications-timeline .paper-number-cell, .publications-timeline .paper-cell { padding: 0.55rem 0.45rem 0.65rem; vertical-align: top; border-bottom: 1px solid rgba(17, 17, 17, 0.1); }
+.publications-timeline .year-cell, .publications-timeline .paper-cell { padding: 4px 8px; vertical-align: top; }
 
-.publications-timeline .year-cell { text-align: right; font-weight: bold; width: 4.5rem; color: rgba(17, 17, 17, 0.62); letter-spacing: 0.03em; padding-right: 0.85rem; }
-
-.publications-timeline .paper-number-cell { width: 2.4rem; padding-left: 0.15rem; padding-right: 0.5rem; text-align: right; font-family: "Gill Sans", "Gill Sans MT", "Gotham Narrow", "Lato", Calibri, sans-serif; font-size: 0.95rem; font-variant-numeric: tabular-nums; color: rgba(17, 17, 17, 0.5); }
-
-.publications-timeline .paper-cell { padding-left: 0.35rem; padding-right: 1.4rem; }
+.publications-timeline .year-cell { text-align: right; font-weight: bold; }
 
 /* Each publication entry */
-.paper-entry { max-width: 66rem; padding: 0.08rem 0 0.18rem; line-height: 1.55; }
+.paper-entry { margin-bottom: 0; line-height: 1.45; }
+
+.paper-number { font-weight: bold; margin-right: 0.25rem; }
 
 /* Paper title: inline with metadata, but allowed to wrap cleanly. */
-.paper-title { display: inline; white-space: normal; color: #8f2f24; }
+.paper-title { display: inline; white-space: normal; }
 
 /* Meta information: inline, wrapping naturally if needed */
-.paper-meta { display: inline; white-space: normal; font-size: 0.92em; line-height: 1.5; color: rgba(17, 17, 17, 0.78); }
+.paper-meta { display: inline; white-space: normal; font-size: 0.9em; line-height: 1.4; }
 
 /* Optional spacing for inline meta items */
 .paper-meta span { margin-right: 8px; }
@@ -381,7 +379,7 @@ hr.slender { border: 0; height: 1px; margin-top: 1.4rem; margin-bottom: 1.4rem; 
 .underline-author { text-decoration: underline; }
 
 /* Publication tag styling */
-.pub-tag { display: inline-block; padding: 1px 6px 2px; border-radius: 4px; font-size: 0.8em; margin-left: 0px; line-height: 1.35; vertical-align: 0.08em; }
+.pub-tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-left: 0px; }
 
 /* Example colors for different publication types */
 /* Adjust these colors as needed, or remove them to keep your default colors */
