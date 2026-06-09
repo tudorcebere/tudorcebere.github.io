@@ -278,7 +278,7 @@ ld: warning: ignoring duplicate libraries: '-lffi'
 ld: warning: search path '/AppleInternal/Library/BuildRoots/4~CJjgugCJ4ENyM-QIheSyiY0FNL8vspelLyB3fTk/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.Internal.sdk/usr/local/lib' not found
 Undefined symbols for architecture arm64:
   "_rb_gc_mark_movable", referenced from:
-      _t in conftest-1b10a8.o
+      _t in conftest-5f922a.o
 ld: symbol(s) not found for architecture arm64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 checked program was:

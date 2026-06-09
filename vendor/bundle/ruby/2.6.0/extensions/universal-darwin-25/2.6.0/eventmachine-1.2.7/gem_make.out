@@ -1,5 +1,5 @@
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20260518-67771-18716bl.rb extconf.rb
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20260609-62038-16x44h0.rb extconf.rb
 creating Makefile
 
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
@@ -24,4 +24,4 @@ ld: warning: search path '/AppleInternal/Library/BuildRoots/4~CJjgugCJ4ENyM-QIhe
 
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/eventmachine-1.2.7/ext/fastfilereader
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 fastfilereaderext.bundle ./.gem.20260518-67771-1sm629n
+/usr/bin/install -c -m 0755 fastfilereaderext.bundle ./.gem.20260609-62038-c3ucjv
