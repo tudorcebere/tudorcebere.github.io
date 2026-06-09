@@ -620,12 +620,27 @@ hr.slender {
 
 /* Ensure no extra top margin in the text area */
 .profile-text {
+  flex: 1 1 0;
+  min-width: 0;
   margin-top: 0;
   padding-top: 0;
 }
 
 .profile-text p:first-child {
   margin-top: 0;
+}
+
+.profile-text p {
+  width: 100%;
+  max-width: 68ch;
+  margin-top: 1rem;
+  padding-right: 0;
+  line-height: 1.75;
+  text-align: justify;
+  text-justify: inter-word;
+  text-wrap: pretty;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 /* ============================================= */
@@ -776,6 +791,13 @@ hr.slender {
   .profile-photo {
     width: 100%;
     max-width: 280px;
+  }
+
+  .profile-text p {
+    max-width: none;
+    text-align: left;
+    text-wrap: balance;
+    hyphens: manual;
   }
 
   .publications-section-title {

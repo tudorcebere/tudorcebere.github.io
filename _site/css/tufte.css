@@ -346,9 +346,11 @@ hr.slender { border: 0; height: 1px; margin-top: 1.4rem; margin-bottom: 1.4rem; 
 .profile-photo { width: 350px; /* Adjust as needed */ height: auto; border-radius: 1%; }
 
 /* Ensure no extra top margin in the text area */
-.profile-text { margin-top: 0; padding-top: 0; }
+.profile-text { flex: 1 1 0; min-width: 0; margin-top: 0; padding-top: 0; }
 
 .profile-text p:first-child { margin-top: 0; }
+
+.profile-text p { width: 100%; max-width: 68ch; margin-top: 1rem; padding-right: 0; line-height: 1.75; text-align: justify; text-justify: inter-word; text-wrap: pretty; hyphens: auto; overflow-wrap: break-word; }
 
 /* ============================================= */
 /*         Publications Timeline Styling         */
@@ -398,7 +400,7 @@ hr.slender { border: 0; height: 1px; margin-top: 1.4rem; margin-bottom: 1.4rem; 
 /* Venue styling */
 .venue { font-size: 0.85em; font-weight: bold; margin-left: 0px; }
 
-@media screen and (max-width: 760px) { body.full-width { width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; } .full-width article p { width: 100%; } .content-listing, ul.content-listing li.listing { width: 100%; padding-left: 0; padding-right: 0; } .listing, .listing h3 { display: block; } .profile-name { font-size: 2.4em; text-align: left; } .about-container { display: block; margin: 1.5rem 0 2rem; } .profile-photo-container { margin-bottom: 1.5rem; } .profile-photo { width: 100%; max-width: 280px; } .publications-section-title { font-size: 2em; margin-top: 2rem; } .publications-timeline { overflow-x: auto; } .publications-timeline table { min-width: 0; } .publications-timeline .year-cell, .publications-timeline .paper-cell { display: block; width: 100%; padding-left: 0; padding-right: 0; text-align: left; } .publications-timeline .year-cell { padding-top: 1rem; padding-bottom: 0.25rem; } .paper-entry { line-height: 1.5; } .paper-meta { display: block; margin-top: 0.35rem; } }
+@media screen and (max-width: 760px) { body.full-width { width: 100%; padding-left: 1.25rem; padding-right: 1.25rem; } .full-width article p { width: 100%; } .content-listing, ul.content-listing li.listing { width: 100%; padding-left: 0; padding-right: 0; } .listing, .listing h3 { display: block; } .profile-name { font-size: 2.4em; text-align: left; } .about-container { display: block; margin: 1.5rem 0 2rem; } .profile-photo-container { margin-bottom: 1.5rem; } .profile-photo { width: 100%; max-width: 280px; } .profile-text p { max-width: none; text-align: left; text-wrap: balance; hyphens: manual; } .publications-section-title { font-size: 2em; margin-top: 2rem; } .publications-timeline { overflow-x: auto; } .publications-timeline table { min-width: 0; } .publications-timeline .year-cell, .publications-timeline .paper-cell { display: block; width: 100%; padding-left: 0; padding-right: 0; text-align: left; } .publications-timeline .year-cell { padding-top: 1rem; padding-bottom: 0.25rem; } .paper-entry { line-height: 1.5; } .paper-meta { display: block; margin-top: 0.35rem; } }
 
 @media print { * { -webkit-transition: none !important; transition: none !important; } *, *:before, *:after { background: transparent !important; box-shadow: none !important; text-shadow: none !important; } @page { margin: 0.75in 0.5in 0.75in 0.5in;
     orphans: 4;
