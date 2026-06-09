@@ -1,5 +1,5 @@
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20260609-62038-1b92tg1.rb extconf.rb
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20260609-68823-1mwmvmh.rb extconf.rb
 creating Makefile
 
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
@@ -345,4 +345,4 @@ ld: warning: search path '/AppleInternal/Library/BuildRoots/4~CJjgugCJ4ENyM-QIhe
 
 current directory: /Users/tudorcebere/Work/website/tudorcebere.github.io/vendor/bundle/ruby/2.6.0/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20260609-62038-1tze8lj
+/usr/bin/install -c -m 0755 ruby_http_parser.bundle ./.gem.20260609-68823-54tk94
