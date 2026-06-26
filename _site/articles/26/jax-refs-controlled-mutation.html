@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JAX Refs: Controlled Mutation</title>
+
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+<!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>  
+
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="https://tudorcebere.github.io/articles/26/jax-refs-controlled-mutation">
+
+  <link rel="alternate" type="application/rss+xml" title="Tufte-Jekyll" href="https://tudorcebere.github.io/feed.xml" />
+</head>
+
+  <body>
+    <header>
+  <nav class="group">
+    <a href="/">
+      <img class="badge" src="/assets/img/badge_1.png" alt="CH">
+    </a>
+    
+    
+      
+    
+      
+    
+      
+        
+          <a href="/css/print.css"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="/">About</a>
+        
+      
+    
+      
+        
+          <a href="/blog/">blog</a>
+        
+      
+    
+  </nav>
+</header>
+
+    <article class="group">
+      <h1>JAX Refs: Controlled Mutation</h1>
+<p class="subtitle">June 26, 2026</p>
+
+<p><span class="newthought">JAX Refs</span>  are mutable array cells. They let you read and write array state while remaining inside JAX transformations such as <code class="language-plaintext highlighter-rouge">jit</code> and <code class="language-plaintext highlighter-rouge">grad</code>. <!--more--></p>
+
+<p>A <code class="language-plaintext highlighter-rouge">jax.Array</code> is a value. In JAX, values do not change. To “update” an array, you compute another array:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This strictness is one reason JAX composes well with compilation, automatic differentiation, vectorization, and parallel execution. The compiler sees values and dependencies, not hidden writes.</p>
+
+<p>But immutability is not always the clearest way to write a program.</p>
+
+<p><label for="ref-use-cases" class="margin-toggle"> ⊕</label><input type="checkbox" id="ref-use-cases" class="margin-toggle" /><span class="marginnote">Refs are best for operational state: logs, buffers, scratch space, and diagnostics. </span>
+Sometimes the thing you want is not a new value. You want a place to put data: a loss computed deep inside a training step, a scratch buffer used inside a loop, a running statistic, a diagnostic from a backward pass, or an output buffer filled in-place.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Ref</code> is JAX’s small, explicit answer to that problem. <label for="jax-refs-docs" class="margin-toggle sidenote-number"></label><input type="checkbox" id="jax-refs-docs" class="margin-toggle" /><span class="sidenote">JAX documentation, “Ref: mutable arrays for data plumbing and memory control”. </span></p>
+
+<h2 id="values-and-locations">Values and locations</h2>
+
+<p>The distinction is simple:</p>
+
+<p><label for="values-cells-table" class="margin-toggle"> ⊕</label><input type="checkbox" id="values-cells-table" class="margin-toggle" /><span class="marginnote">Table 1: arrays are values; refs are mutable locations. </span></p>
+<div class="table-wrapper">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: left">Object</th>
+        <th style="text-align: left">Mental model</th>
+        <th style="text-align: left">Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left"><code class="language-plaintext highlighter-rouge">jax.Array</code></td>
+        <td style="text-align: left">A value</td>
+        <td style="text-align: left">Compute a new value</td>
+      </tr>
+      <tr>
+        <td style="text-align: left"><code class="language-plaintext highlighter-rouge">jax.Ref</code></td>
+        <td style="text-align: left">A mutable location</td>
+        <td style="text-align: left">Read or write the stored value</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>An array expression does not update its inputs:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">jnp</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>The original <code class="language-plaintext highlighter-rouge">x</code> is still <code class="language-plaintext highlighter-rouge">[1., 2., 3.]</code>. The expression produced a new value, <code class="language-plaintext highlighter-rouge">y</code>.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">Ref</code> is different. It names a location that contains an array value:</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">new_ref</span><span class="p">(</span><span class="n">jnp</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]))</span>
+
+<span class="n">x_ref</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">x_ref</span><span class="p">[...])</span>  <span class="c1"># [ 1., 12.,  3.]
+</span></code></pre></div>  </div>
+
+</div>
+
+<p>The syntax follows NumPy indexing. Read from a ref by indexing it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="n">x_ref</span><span class="p">[...]</span>
+</code></pre></div></div>
+
+<p>Write the whole value with assignment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span><span class="p">[...]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Update a slice in-place:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span>
+</code></pre></div></div>
+
+<p>The notation is standard, but the meaning is not. A <code class="language-plaintext highlighter-rouge">Ref</code> introduces controlled mutation into JAX’s staged computation model.</p>
+
+<h2 id="why-refs-exist">Why refs exist</h2>
+
+<p>The usual JAX style is functional:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_state</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">old_state</span><span class="p">,</span> <span class="nb">input</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>That style is often the right one. It makes dependencies explicit, keeps functions easy to transform, and gives the compiler a clean program to analyze.</p>
+
+<p>But not all data in a program has the same status. Model parameters, optimizer state, batch inputs, and PRNG keys usually belong in the function signature. They define the computation.</p>
+
+<p>Metrics, scratch space, and diagnostics are different. They are often operational. You need them, but they are not always part of the function you are trying to express.</p>
+
+<p>A <code class="language-plaintext highlighter-rouge">Ref</code> gives that operational data an explicit home:</p>
+
+<blockquote>
+  <p>This state is mutable, and its location is visible.</p>
+</blockquote>
+
+<p>That is the compromise. Mutation is allowed, but it is attached to a particular reference, not hidden in arbitrary Python state.</p>
+
+<h2 id="recording-losses-inside-a-loop">Recording losses inside a loop</h2>
+
+<p>Suppose we run a few steps of gradient descent and want to record the loss at each step.</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="n">jnp</span>
+
+<span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="p">.</span><span class="n">mean</span><span class="p">((</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="mf">0.1</span>
+</code></pre></div>  </div>
+
+</div>
+
+<h3 id="without-ref-carry-the-log-through-the-loop">Without <code class="language-plaintext highlighter-rouge">Ref</code>: carry the log through the loop</h3>
+
+<p>In ordinary functional JAX, the loss history must be part of the loop state.</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">jax</span><span class="p">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">train_without_refs</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">losses0</span> <span class="o">=</span> <span class="n">jnp</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">steps</span><span class="p">,))</span>
+
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">carry</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">losses</span> <span class="o">=</span> <span class="n">carry</span>
+
+        <span class="n">loss</span><span class="p">,</span> <span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">value_and_grad</span><span class="p">(</span><span class="n">mse</span><span class="p">)(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+
+        <span class="c1"># This returns a new array value.
+</span>        <span class="n">losses</span> <span class="o">=</span> <span class="n">losses</span><span class="p">.</span><span class="n">at</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="nb">set</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">losses</span><span class="p">),</span> <span class="bp">None</span>
+
+    <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">losses</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">lax</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">body</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">losses0</span><span class="p">),</span>
+        <span class="n">jnp</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="n">losses</span>
+</code></pre></div>  </div>
+
+</div>
+
+<p>This is good JAX. It is explicit and transformable. But the log has become part of the loop carry. In a small example that is harmless. In a real training step, this pattern spreads: every function that computes an interesting diagnostic must return it, and every caller must forward it. The algorithm becomes harder to read because the bookkeeping travels with the state.</p>
+
+<h3 id="with-ref-put-the-log-in-an-output-buffer">With <code class="language-plaintext highlighter-rouge">Ref</code>: put the log in an output buffer</h3>
+
+<p>With a <code class="language-plaintext highlighter-rouge">Ref</code>, the loss history can live in a separate mutable buffer.</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">jax</span><span class="p">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">train_with_refs</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">losses_ref</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">loss</span><span class="p">,</span> <span class="n">grad</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">value_and_grad</span><span class="p">(</span><span class="n">mse</span><span class="p">)(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="n">lr</span> <span class="o">*</span> <span class="n">grad</span>
+
+        <span class="c1"># The loss is diagnostic data, not optimization state.
+</span>        <span class="n">losses_ref</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">lax</span><span class="p">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">w</span><span class="p">,</span> <span class="bp">None</span>
+
+    <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">lax</span><span class="p">.</span><span class="n">scan</span><span class="p">(</span>
+        <span class="n">body</span><span class="p">,</span>
+        <span class="n">w</span><span class="p">,</span>
+        <span class="n">jnp</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">w</span>
+</code></pre></div>  </div>
+
+</div>
+
+<p>The caller owns the buffer:</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">losses_ref</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">new_ref</span><span class="p">(</span><span class="n">jnp</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">steps</span><span class="p">,)))</span>
+
+<span class="n">w_final</span> <span class="o">=</span> <span class="n">train_with_refs</span><span class="p">(</span><span class="n">w0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">losses_ref</span><span class="p">)</span>
+<span class="n">losses</span> <span class="o">=</span> <span class="n">losses_ref</span><span class="p">[...]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+</code></pre></div>  </div>
+
+</div>
+
+<p>The structural change is the point. Without refs:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(w, losses) -&gt; body -&gt; (w, losses)
+</code></pre></div></div>
+
+<p>With refs:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>w -&gt; body -&gt; w
+</code></pre></div></div>
+
+<p>The loop carry is now just the optimization state. The loss history is still explicit, but it lives beside the algorithm rather than inside it. That is the main use of <code class="language-plaintext highlighter-rouge">Ref</code>: separating the value flow of the computation from the data plumbing around it.</p>
+
+<h2 id="why-stop_gradient-appears">Why <code class="language-plaintext highlighter-rouge">stop_gradient</code> appears</h2>
+
+<p>This line matters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">losses_ref</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">lax</span><span class="p">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The loss buffer is a diagnostic. We want to record the value, not make the mutable write part of the differentiated computation.</p>
+
+<p>A useful rule is:</p>
+
+<blockquote>
+  <p>If a ref is used only for metrics, logging, or diagnostics, write stopped values into it.</p>
+</blockquote>
+
+<p>This keeps the mathematical function visible:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w_final</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The ref records what happened. It does not define what the function is.</p>
+
+<h2 id="a-ref-is-not-an-array">A <code class="language-plaintext highlighter-rouge">Ref</code> is not an array</h2>
+
+<p>The right mental model is that references are similar to boxes where you can put values:</p>
+
+<div class="code-listing">
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span> <span class="o">=</span> <span class="n">jax</span><span class="p">.</span><span class="n">new_ref</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">jnp</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_ref</span><span class="p">)</span>   <span class="c1"># wrong
+</span><span class="k">except</span> <span class="nb">TypeError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">jnp</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_ref</span><span class="p">[...])</span>  <span class="c1"># right
+</span></code></pre></div>  </div>
+
+</div>
+
+<p>A ref is the mutable location. The array value is stored inside it.</p>
+
+<p>The two basic operations are:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span><span class="p">[...]</span>      <span class="c1"># read the stored value
+</span><span class="n">x_ref</span><span class="p">[...]</span> <span class="o">=</span> <span class="n">y</span>  <span class="c1"># replace the stored value
+</span></code></pre></div></div>
+
+<p>For indexed state:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>        <span class="c1"># read one slice
+</span><span class="n">x_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>    <span class="c1"># write one slice
+</span><span class="n">x_ref</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">y</span>   <span class="c1"># update one slice
+</span></code></pre></div></div>
+
+<p>The compact rule is:</p>
+
+<blockquote>
+  <p>Do math on <code class="language-plaintext highlighter-rouge">ref[...]</code>, not on <code class="language-plaintext highlighter-rouge">ref</code>.</p>
+</blockquote>
+
+<p>The brackets are not decoration. They are the boundary between the mutable cell and the array value inside it. This is similar to dereferencing or pointer programming in imperative languages like C/C++.</p>
+
+<h2 id="when-to-use-refs">When to use refs</h2>
+
+<p>Use refs when the program is clearer with an explicit mutable location.</p>
+
+<p><label for="ref-boundary-table" class="margin-toggle"> ⊕</label><input type="checkbox" id="ref-boundary-table" class="margin-toggle" /><span class="marginnote">Table 2: operational state can live in refs; mathematical state should usually remain an array. </span></p>
+<div class="table-wrapper">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: left">Prefer a <code class="language-plaintext highlighter-rouge">Ref</code> for</th>
+        <th style="text-align: left">Prefer an array for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: left">Metric buffers</td>
+        <td style="text-align: left">Model parameters</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Temporary scratch arrays</td>
+        <td style="text-align: left">Optimizer state</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Output buffers</td>
+        <td style="text-align: left">Batch inputs</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Running statistics and logs</td>
+        <td style="text-align: left">Return values that define the function</td>
+      </tr>
+      <tr>
+        <td style="text-align: left">Diagnostics from compiled code</td>
+        <td style="text-align: left">Values you want to batch, serialize, or pass around freely</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>If a value is part of the mathematical interface of the function, pass it and return it. If it is operational data that needs a stable location, a ref may be the clearer tool.</p>
+
+<h2 id="end-note">End note</h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">Ref</code> is a controlled mutable cell for JAX arrays.</p>
+
+<p>An array is a value. A ref is a location containing a value. The compact rule is:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ref</span><span class="p">[...]</span>      <span class="c1"># read
+</span><span class="n">ref</span><span class="p">[...]</span> <span class="o">=</span> <span class="n">x</span>  <span class="c1"># write
+</span></code></pre></div></div>
+
+<p>Internal refs can preserve a pure interface from the caller’s perspective. Ref arguments and closed-over refs are explicit side effects. The restrictions around refs exist to rule out ambiguous aliasing and transformation behavior.</p>
+
+<p>The point is not that JAX becomes imperative. The point is narrower: JAX now has a small, explicit place for mutation when mutation is the clearest way to express data plumbing or memory control.</p>
+
+
+
+    </article>
+    <span class="print-footer">JAX Refs: Controlled Mutation - June 26, 2026 - clay harmon</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:tudorcebere@gmail.com"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//x.com/TCebere"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//scholar.google.com/citations?user=uunZxOUAAAAJ&hl=en"><span class="icon-google2"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/tudorcebere"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="//www.linkedin.com/in/ioan-tudor-cebere-b18b0713a/"><span class="icon-linkedin"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2026 &nbsp;&nbsp;CLAY HARMON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for Content-centric blogging </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

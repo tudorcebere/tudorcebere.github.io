@@ -22,9 +22,17 @@
 
 .highlight .c { color: #998; font-style: italic; }
 
+.highlight .ch { color: #998; font-style: italic; }
+
+.highlight .cd { color: #998; font-style: italic; }
+
+.highlight .cpf { color: #998; font-style: italic; }
+
 .highlight .err { color: #a61717; background-color: #e3d2d2; }
 
 .highlight .k { font-weight: bold; }
+
+.highlight .kv { font-weight: bold; }
 
 .highlight .o { font-weight: bold; }
 
@@ -64,6 +72,8 @@
 
 .highlight .kd { font-weight: bold; }
 
+.highlight .kn { font-weight: bold; }
+
 .highlight .kp { font-weight: bold; }
 
 .highlight .kr { font-weight: bold; }
@@ -71,6 +81,10 @@
 .highlight .kt { color: #458; font-weight: bold; }
 
 .highlight .m { color: #099; }
+
+.highlight .mb { color: #099; }
+
+.highlight .mx { color: #099; }
 
 .highlight .s { color: #d14; }
 
@@ -86,7 +100,13 @@
 
 .highlight .ne { color: #900; font-weight: bold; }
 
+.highlight .nd { color: #3c5d5d; font-weight: bold; }
+
 .highlight .nf { color: #900; font-weight: bold; }
+
+.highlight .fm { color: #900; font-weight: bold; }
+
+.highlight .nl { color: #900; font-weight: bold; }
 
 .highlight .nn { color: #555; }
 
@@ -105,6 +125,8 @@
 .highlight .mi { color: #099; }
 
 .highlight .mo { color: #099; }
+
+.highlight .dl { color: #d14; }
 
 .highlight .sb { color: #d14; }
 
@@ -135,6 +157,8 @@
 .highlight .vg { color: #008080; }
 
 .highlight .vi { color: #008080; }
+
+.highlight .vm { color: #008080; }
 
 .highlight .il { color: #099; }
 
@@ -199,6 +223,12 @@ blockquote footer { font-size: 1.1rem; line-height: 1.78181818; margin-top: 1.78
 .sans { font-family: "Gill Sans", "Gill Sans MT", "Gotham Narrow", "Lato", Calibri, sans-serif; letter-spacing: .03em; }
 
 pre, pre code, p code, p pre code { font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; font-size: 1.2rem; line-height: 1.71428571; margin-top: 1.71428571rem; }
+
+.code-listing { width: 52.5%; margin-top: 1.71428571rem; margin-bottom: 1.71428571rem; padding: 0.25rem 0 0.25rem 1.15rem; border-left: 2px solid rgba(160, 0, 0, 0.42); background: #fffff1; }
+
+.code-listing .highlight { background: transparent; margin-bottom: 0; }
+
+.code-listing pre, .code-listing pre code { width: auto; padding-left: 0; margin-top: 0; }
 
 h1 code, h2 code, h3 code { font-size: 0.80em; }
 
@@ -280,7 +310,7 @@ label.sidenote-number { display: inline; }
 
 label.margin-toggle:not(.sidenote-number) { display: none; }
 
-@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: #a00000; } .sidenote, .marginnote { display: none; } .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote { display: block; float: left; left: 0; clear: both; width: 100%; margin: 1rem 0; vertical-align: baseline; position: relative; } label { cursor: pointer; } pre, pre code, p code, p pre code { width: 100%; padding: 0; } .table-caption { display: block; float: none; clear: both; width: 100%; margin-top: 1rem; margin-bottom: 0.5rem; margin-left: 0; margin-right: 0; vertical-align: baseline; position: relative; } div.table-wrapper, table, table.booktabs { width: 100%; } div.table-wrapper { border-right: 1px solid #efefef; overflow-x: auto; } img { max-width: 100%; } figcaption.maincolumn-figure, figure.fullwidth figcaption { float: none; text-align: center; } figure.fullwidth figcaption { margin-left: 0; } }
+@media (max-width: 760px) { label.margin-toggle:not(.sidenote-number) { display: inline; color: #a00000; } .sidenote, .marginnote { display: none; } .margin-toggle:checked + .sidenote, .margin-toggle:checked + .marginnote { display: block; float: left; left: 0; clear: both; width: 100%; margin: 1rem 0; vertical-align: baseline; position: relative; } label { cursor: pointer; } pre, pre code, p code, p pre code { width: 100%; padding: 0; } .code-listing { width: 100%; padding-left: 0.85rem; padding-right: 0.5rem; box-sizing: border-box; } .code-listing pre, .code-listing pre code { width: auto; } .table-caption { display: block; float: none; clear: both; width: 100%; margin-top: 1rem; margin-bottom: 0.5rem; margin-left: 0; margin-right: 0; vertical-align: baseline; position: relative; } div.table-wrapper, table, table.booktabs { width: 100%; } div.table-wrapper { border-right: 1px solid #efefef; overflow-x: auto; } img { max-width: 100%; } figcaption.maincolumn-figure, figure.fullwidth figcaption { float: none; text-align: center; } figure.fullwidth figcaption { margin-left: 0; } }
 
 /*--- End of Basic Layout stuff from tufte.css ---*/
 /* -- Jekyll specific styling --*/
